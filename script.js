@@ -1,51 +1,81 @@
 
 
-const myElement = document.querySelector('#myElement');
 
-const callback = (entries, observer) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      alert('要素が表示されました');
-    } else {
-      alert('要素が非表示です');
-    }
-  });
-};
+const image = document.querySelector('img');
+const text1 = document.querySelector('.txt1');
+const viewportCenterX = window.innerWidth / 2;
 
-const options = {
-  root: null,
-  rootMargin: '0px',
-  threshold: 0.5
-};
+let isCrossingCenterLine = false; // 中央ラインを通過しているかのフラグ
 
-const observer = new IntersectionObserver(callback, options);
+window.addEventListener('scroll', () => {
+  const imageBounds = image.getBoundingClientRect();
 
-observer.observe(myElement);
+  const imageCenterX = imageBounds.left + imageBounds.width / 2;
+  
+  if (!isCrossingCenterLine && imageCenterX <= viewportCenterX) {
+    isCrossingCenterLine = true;
+    alert('画像の中央がPCの中央ラインを通過しました');
+    text1.classList.remove('opacity-0')
+    text1.querySelector("p").classList.add('animate__fadeIn');
+  }
+});
 
+//-----------------------------------------------------
 
+// const myElement = document.querySelector('img');
 
+// const callback = (entries, observer) => {
+//   entries.forEach(entry => {
+//     // if (entry.isIntersecting) {
+//     //   alert('要素が表示されました');
+//     // }
+//     const imageBounds = entry.boundingClientRect;
+//     const viewportCenterX = window.innerWidth / 2;
+
+//     if (imageBounds.left <= viewportCenterX && imageBounds.right >= viewportCenterX) {
+//       alert('画像の中央がPCの中央ラインを通過しました');
+//     }
+    
+//   });
+// };
 
 // const options = {
-//     root: null, // ビューポートをルートとして使用
-//     rootMargin: '0px', // ビューポートのマージン
-//     threshold: 0.5 // 要素がビューポートの50％以上表示された場合にイベントを発火
-//   };
-  
-//   const target = document.querySelector('img');
-//   observer.observe(target);
+//   root: null,
+//   rootMargin: '0px',
+//   //threshold: 0.5
+//   threshold: 1
+// };
 
-//   const observer = new IntersectionObserver(callback, options);
+// const observer = new IntersectionObserver(callback, options);
 
-//   function callback(entries, observer) {
-//     entries.forEach(entry => {
-//       if (entry.isIntersecting) {
-//         // 要素がビューポート内に表示された場合の処理
-//         // ここで画像の読み込みを開始したり、アクションを実行したりできます
-//         alert('you did it!')
-//       } else {
-//         alert('you do not did it!')
-//         // 要素がビューポート外に表示された場合の処理
-//         // ここで画像の読み込みを停止したり、アクションを中断したりできます
-//       }
-//     });
-//   }
+// observer.observe(myElement);
+
+//------------------------------------
+
+
+// const image = document.querySelector('img');
+// const viewportCenterX = window.innerWidth / 2;
+
+// const callback = (entries, observer) => {
+//   entries.forEach(entry => {
+//     const imageBounds = entry.boundingClientRect;
+//     const imageCenterX = imageBounds.left + imageBounds.width / 2;
+
+//     if (imageCenterX <= viewportCenterX) {
+//       alert('画像の中央がPCの中央ラインを通過しました');
+//       // アラートが表示された後に処理を停止する場合は、以下の行のコメントを解除します
+//       // observer.unobserve(image);
+//     }
+//   });
+// };
+
+// const options = {
+//   root: null,
+//   rootMargin: '0px',
+//   threshold: [0] // thresholdを0に設定して、交差判定を1ピクセル以上の重なりで行う
+// };
+
+// const observer = new IntersectionObserver(callback, options);
+
+// observer.observe(image);
+
