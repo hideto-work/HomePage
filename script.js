@@ -14,9 +14,10 @@ window.addEventListener('scroll', () => {
   
   if (!isCrossingCenterLine && imageCenterX <= viewportCenterX) {
     isCrossingCenterLine = true;
-    alert('画像の中央がPCの中央ラインを通過しました');
+    //alert('画像の中央がPCの中央ラインを通過しました');
     text1.classList.remove('opacity-0')
     text1.querySelector("p").classList.add('animate__fadeIn');
+    //text1.classList.add('animate__fadeIn');
   }
 });
 
