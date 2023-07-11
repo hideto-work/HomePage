@@ -1,0 +1,35 @@
+<html>
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <!-- <link rel='stylesheet' href='style.css'> -->
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" /> -->
+
+    <title>XXXXX</title>
+
+</head>
+
+<body>
+
+    <button onclick="dataLoading()">クリック</button>
+    <div id="output"></div>
+
+    <script>
+        function dataLoading() {
+            fetch('https://raw.githubusercontent.com/hideto-work/HomePage/main/data.json')
+                .then(response => response.json())
+                .then(data => {
+                    // HTML要素を特定し、データを出力する
+                    var outputElement = document.getElementById("output");
+                    outputElement.innerHTML = JSON.stringify(data);
+                });
+        }
+    </script>
+
+</body>
+
+</html>
